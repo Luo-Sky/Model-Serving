@@ -219,8 +219,8 @@ def Detection(msg, if_bbox):
                 best_result.append(item)
 
         # 转换坐标 TODO:是否需要？
-        _, _, w, h = object_detection_playground_predictor._model.fixed_input_shape
-        ori_w, ori_h, _ = img.shape
+        # _, _, w, h = object_detection_playground_predictor._model.fixed_input_shape
+        # ori_w, ori_h, _ = img.shape
         # best_result = trans_bbox(best_result, ori_w/w, ori_h/h)
         return {'label': img, 'data': best_result}
 
@@ -234,8 +234,8 @@ def Detection(msg, if_bbox):
                 best_result.append(item)
 
         # 转换坐标 TODO:是否需要？
-        _, _, w, h = object_detection_playground_predictor._model.fixed_input_shape
-        ori_w, ori_h, _ = img.shape
+        # _, _, w, h = object_detection_playground_predictor._model.fixed_input_shape
+        # ori_w, ori_h, _ = img.shape
         # best_result = trans_bbox(best_result, ori_w/w, ori_h/h)
         return {'label': img, 'data': best_result}
 
@@ -249,8 +249,8 @@ def Detection(msg, if_bbox):
                 best_result.append(item)
 
         # 转换坐标 TODO:是否需要？
-        _, _, w, h = object_detection_playground_predictor._model.fixed_input_shape
-        ori_w, ori_h, _ = img.shape
+        # _, _, w, h = object_detection_playground_predictor._model.fixed_input_shape
+        # ori_w, ori_h, _ = img.shape
         # best_result = trans_bbox(best_result, ori_w/w, ori_h/h)
         return {'label': img, 'data': best_result}
     
