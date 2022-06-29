@@ -9,6 +9,9 @@ gdal
 paddlepaddle
 paddlers
 ```
+### Download model and data(optional)
+
+(暂未公开)[]
 
 ### Use
 
@@ -16,4 +19,3 @@ paddlers
 python ./server.py
 ```
 
-### 
