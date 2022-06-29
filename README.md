@@ -11,7 +11,7 @@ paddlers
 ```
 ### Download model and data(optional)
 
-(暂未公开)[]
+[暂未公开]()
 
 ### Use
 
