@@ -2,18 +2,18 @@
 
 
 
-### Dependence
+### 环境依赖
 
 ```
 gdal
 paddlepaddle
 paddlers
 ```
-### Download model and data(optional)
+### 下载训练模型与测试数据（可选）
 
 [暂未公开]()
 
-### Use
+### 使用
 
 ```
 python ./server.py
