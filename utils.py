@@ -42,6 +42,12 @@ segmentation_15_confidence = {
     "low": 0.3
 }
 
+# BGR
+change_detection_color = [0,0,255]
+water_extraction_color = [255,0,0]
+buildup_extraction_color = [0,0,255]
+road_extraction_color = [255,255,255]
+
 gid5_classname = ['buildup', 'farmland', 'forest', 'meadow', 'water']
 gid5_classname_CN = ['建筑', '田地', '林地', '草地', '水体']
 gid15_classname = ['industrial_land', 'urban_residential', 'rural_residential',
@@ -104,6 +110,17 @@ def filter_seg_img(label, pixels, class_num):
         arr = bin_label > 0
         new_label[remove_small_objects(arr, connectivity=1, min_size=pixels)] = i
     return new_label
+
+def bin2color(label, type):
+    if type == "change_detection":
+        label[np.all(label == (int(255), int(255), int(255)), axis=-1)] = (int(change_detection_color[0]), int(change_detection_color[1]), int(change_detection_color[2]))
+    elif type == "water_extraction":
+        label[np.all(label == (int(255), int(255), int(255)), axis=-1)] = (int(water_extraction_color[0]), int(water_extraction_color[1]), int(water_extraction_color[2]))
+    elif type == "buildup_extraction":
+        label[np.all(label == (int(255), int(255), int(255)), axis=-1)] = (int(buildup_extraction_color[0]), int(buildup_extraction_color[1]), int(buildup_extraction_color[2]))
+    elif type == "road_extraction":
+        label[np.all(label == (int(255), int(255), int(255)), axis=-1)] = (int(road_extraction_color[0]), int(road_extraction_color[1]), int(road_extraction_color[2]))
+    return label
 
 def transparent(label):
     tmp = cv2.cvtColor(label, cv2.COLOR_BGR2GRAY)

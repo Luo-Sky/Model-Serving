@@ -93,8 +93,10 @@ class Resquest(BaseHTTPRequestHandler):
         if len(label.shape) == 2:
             label = np.expand_dims(label, axis=2)
             label = np.concatenate((label, label, label), axis=-1)
-            
+
+        bin2color(label, req['type'])
         label = transparent(label)
+        
         if "left" in req and "right" in req and "bottom" in req and "top" in req:
             new_name = os.path.splitext(req['img'])[0] + '_predict_{}_{}_{}_{}.png'.format(str(req['left']), str(req['top']), str(req['bottom']), str(req['top']))
         else:
