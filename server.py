@@ -19,18 +19,18 @@ sys.path.append('./PaddleRS')
 host = ('localhost', 8000)
 # 模型加载
 # 地物提取
-road_extraction_predictor = pdrs.deploy.Predictor(model_dir='./model/road_extraction_model', use_gpu=True, gpu_id=0)
-water_extraction_predictor = pdrs.deploy.Predictor(model_dir='./model/water_extraction_model', use_gpu=True, gpu_id=0)
+road_extraction_predictor = pdrs.deploy.Predictor(model_dir='./model/road_extraction_model', use_gpu=False, gpu_id=0)
+# water_extraction_predictor = pdrs.deploy.Predictor(model_dir='./model/water_extraction_model', use_gpu=False, gpu_id=0)
 # buildup_extraction_predictor = pdrs.deploy.Predictor(model_dir='./model/buildup_extraction_model', use_gpu=False, gpu_id=0)
 # 变化检测
-change_dectation_predictor = pdrs.deploy.Predictor(model_dir='./model/change_detection_model', use_gpu=True, gpu_id=0)
+change_dectation_predictor = pdrs.deploy.Predictor(model_dir='./model/change_detection_model', use_gpu=False, gpu_id=0)
 # 目标检测
 # object_detection_playground_predictor = pdrs.deploy.Predictor(model_dir='./model/object_detection_playground_model', use_gpu=False, gpu_id=0)
 # object_detection_overpass_predictor = pdrs.deploy.Predictor(model_dir='./model/object_detection_overpass_model', use_gpu=False, gpu_id=0)
-object_detection_aircraft_predictor = pdrs.deploy.Predictor(model_dir='./model/object_detection_aircraft_model', use_gpu=True, gpu_id=0)
+object_detection_aircraft_predictor = pdrs.deploy.Predictor(model_dir='./model/object_detection_aircraft_model', use_gpu=False, gpu_id=0)
 # 地物分类
-# segmentation_5_predictor = pdrs.deploy.Predictor(model_dir='./model/segmentation_gid5_model', use_gpu=False, gpu_id=0)
-segmentation_15_predictor = pdrs.deploy.Predictor(model_dir='./model/segmentation_gid15_model', use_gpu=True, gpu_id=0)
+segmentation_5_predictor = pdrs.deploy.Predictor(model_dir='./model/segmentation_gid5_model', use_gpu=False, gpu_id=0)
+segmentation_15_predictor = pdrs.deploy.Predictor(model_dir='./model/segmentation_gid15_model', use_gpu=False, gpu_id=0)
 print("load model finished!")
 
 class Resquest(BaseHTTPRequestHandler):
@@ -66,7 +66,8 @@ class Resquest(BaseHTTPRequestHandler):
             req["bottom"] = int(req["bottom"])
             req["top"] = int(req["top"])
         #检测
-        result = Detection(req, if_bbox)
+        with paddle.no_grad():
+            result = Detection(req, if_bbox)
         label = result['label']
         data = result['data']
 
