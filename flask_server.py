@@ -22,8 +22,8 @@ def process_json():
     req_datas = request.get_data()
     req = json.loads(req_datas.decode())
 
-    # for index in req:
-    #     req[index] =req[index][0]
+    for index in req:
+        req[index] =req[index][0]
     if "confidence" not in req:
         req["confidence"] = 'medium'
     if "min_pixel" not in req:

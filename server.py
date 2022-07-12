@@ -38,8 +38,8 @@ class Resquest(BaseHTTPRequestHandler):
         req_datas = self.rfile.read(int(self.headers['content-length']))  
         req = json.loads(req_datas.decode())
 
-        # for index in req:
-        #     req[index] =req[index][0]
+        for index in req:
+            req[index] =req[index][0]
         if "confidence" not in req:
             req["confidence"] = 'medium'
         if "min_pixel" not in req:
@@ -49,14 +49,13 @@ class Resquest(BaseHTTPRequestHandler):
         # print(req)
         if_bbox_0 = "left" in req and "right" in req and "bottom" in req and "top" in req
         if if_bbox_0:
-            if_bbox_1 = req['left'] != -1 and req['right'] != -1 and req['bottom'] != -1 and req['top'] != -1
-        if_bbox = if_bbox_0 and if_bbox_1
-        
-        if if_bbox:
             req["left"] = int(req["left"])
             req["right"] = int(req["right"])
             req["bottom"] = int(req["bottom"])
             req["top"] = int(req["top"])
+        if if_bbox_0:
+            if_bbox_1 = req['left'] != -1 and req['right'] != -1 and req['bottom'] != -1 and req['top'] != -1
+        if_bbox = if_bbox_0 and if_bbox_1
         #检测
         with paddle.no_grad():
             result = Detection(req, if_bbox)
