@@ -1,4 +1,5 @@
 import numpy as np
+from time import time, sleep
 from skimage.morphology import remove_small_objects
 import cv2
 ip = "http://faye.nat300.top"
@@ -46,7 +47,7 @@ segmentation_15_confidence = {
 change_detection_color = [0,0,255]
 water_extraction_color = [255,0,0]
 buildup_extraction_color = [0,0,255]
-road_extraction_color = [255,255,255]
+road_extraction_color = [28,156,217]
 
 gid5_classname = ['buildup', 'farmland', 'forest', 'meadow', 'water']
 gid5_classname_CN = ['建筑', '田地', '林地', '草地', '水体']
@@ -129,3 +130,8 @@ def transparent(label):
     rgba = [b, g, r, alpha]
     dst = cv2.merge(rgba, 4)
     return dst
+
+def trusty_sleep(n):
+    start = time()
+    while (time() - start < n):
+        sleep(n - (time() - start))
